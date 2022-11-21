@@ -18,12 +18,12 @@ def split_csv(args, path):
         else:    tables[data_names[i]] = df[index_positions[i]:index_positions[i+1]]
 
     for data_name in data_names:
-
         # if tables[data_name].columns[0] != data_name:
-        tables[data_name] = tables[data_name].set_axis(tables[data_name].iloc[0].to_list(), axis=1)
+        # tables[data_name] = tables[data_name].set_axis(tables[data_name].iloc[0].to_list(), axis=1)
+        header = tables[data_name].iloc[0].dropna().to_list()[2:]
         tables[data_name] = tables[data_name].iloc[1:]
         tables[data_name] = tables[data_name].dropna(axis=1)
-        tables[data_name].to_csv(osp.join(args.root_dir,data_name+'.csv'), index = False)
+        tables[data_name].iloc[:, -len(header):].to_csv(osp.join(args.root_dir,data_name+'.csv'), index = False, header = header)
 
 if __name__ == '__main__':
     import argparse
