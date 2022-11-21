@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,12 +26,13 @@ SECRET_KEY = 'django-insecure-8!2f2y&to*7esm_-!!ovg#_pqns^c-o1fvj#dd5l4f=m_6*q)r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['163.239.223.177']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'getdata.apps.GetdataConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,8 +78,15 @@ WSGI_APPLICATION = 'kimcoach_server.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'kimcoach',
+        'USER': 'root',
+                'PASSWORD': 'cse4205002',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'OPTIONS': {
+        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
